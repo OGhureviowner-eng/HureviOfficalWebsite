@@ -3,274 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BETA | Login & Coming Soon</title>
+    <title>BETA | Access Granted</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00d4ff;
-            --dark: #0d1117;
-            --darker: #080c10;
-            --gray: #1a1f2e;
-            --light: #e0e0e0;
+            --primary-glow: #00d4ff;
+            --dark: #0a0e17;
+            --darker: #05070f;
+            --gray: #1a2332;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--dark);
             color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+            overflow: hidden;
+            height: 100vh;
         }
 
-        /* Split layout */
+        /* Animated Matrix Rain Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
         .container {
             display: flex;
             width: 100%;
             min-height: 100vh;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Left side - Content */
+        /* LEFT SIDE */
         .left {
             width: 45%;
             padding: 80px 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background: var(--dark);
+            background: linear-gradient(135deg, #0a0e17 0%, #0f1a2e 100%);
             position: relative;
-            z-index: 2;
+            overflow: hidden;
+        }
+
+        .left::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(0,212,255,0.15) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         h1 {
-            font-size: 6.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 8rem;
             font-weight: 900;
-            letter-spacing: 10px;
-            background: linear-gradient(90deg, #00d4ff, #0088cc);
+            letter-spacing: 12px;
+            background: linear-gradient(90deg, #00d4ff, #00ffaa, #0088ff);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(0,212,255,0.6);
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: hue-rotate(0deg); }
+            to { filter: hue-rotate(30deg); }
         }
 
         .tagline {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             opacity: 0.9;
-            margin: 20px 0 40px;
-            line-height: 1.6;
-            max-width: 420px;
+            margin: 25px 0 50px;
+            line-height: 1.7;
+            max-width: 460px;
+            background: linear-gradient(90deg, #ccc, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .login-box {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 16px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            width: 380px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(10, 20, 40, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 45px;
+            border-radius: 20px;
+            border: 1.5px solid rgba(0, 212, 255, 0.3);
+            width: 400px;
+            box-shadow: 
+                0 0 50px rgba(0, 212, 255, 0.3),
+                inset 0 0 30px rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s;
+        }
+
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0,212,255,0.1), transparent);
+            animation: shine 6s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
         }
 
         input {
             width: 100%;
-            padding: 16px 20px;
-            margin: 12px 0;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 14px 0;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(0,212,255,0.4);
+            border-radius: 12px;
             color: white;
-            font-size: 1rem;
+            font-size: 1.1rem;
             outline: none;
-            transition: all 0.3s;
+            transition: all 0.4s;
         }
 
         input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-        }
-
-        input::placeholder {
-            color: #888;
+            box-shadow: 0 0 25px rgba(0,212,255,0.6);
+            transform: scale(1.02);
         }
 
         button {
             width: 100%;
-            padding: 16px;
-            background: var(--primary);
+            padding: 18px;
+            background: linear-gradient(90deg, #00d4ff, #0099ff);
             color: black;
             font-weight: bold;
+            font-size: 1.2rem;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: 12px;
             cursor: pointer;
-            margin-top: 10px;
-            transition: all 0.3s;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.6s;
+        }
+
+        button:hover::after {
+            left: 100%;
         }
 
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
-        }
-
-        .or {
-            text-align: center;
-            margin: 25px 0;
-            color: #777;
-            position: relative;
-        }
-
-        .or::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #333;
-        }
-
-        .or span {
-            background: var(--dark);
-            padding: 0 15px;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,212,255,0.5);
         }
 
         .notify {
             background: transparent;
-            border: 2px solid var(--primary);
+            border: 2px solid var(--primary) !important;
             color: var(--primary);
-            margin-top: 10px;
         }
 
         .notify:hover {
-            background: var(--primary);
+            background: var(--primary) !important;
             color: black;
         }
 
-        /* Right side - Wallpaper */
+        /* RIGHT SIDE - EPIC WALLPAPER + SCANLINES */
         .right {
             width: 55%;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
-                        url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&h=1080&fit=crop&crop=entropy&auto=format&q=80');
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)),
+                        url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&h=1080&fit=crop&auto=format&q=80');
             background-size: cover;
             background-position: center;
             position: relative;
+            overflow: hidden;
         }
 
         .right::after {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(0, 212, 255, 0.15) 0%,
-                rgba(0, 50, 100, 0.3) 50%,
-                rgba(0, 0, 0, 0.7) 100%);
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,212,255,0.03) 2px,
+                rgba(0,212,255,0.03) 4px
+            );
+            animation: scanlines 8s linear infinite;
         }
 
-        /* Floating particles only on left side */
-        .particles {
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        /* Particles + Floating Orbs */
+        .orb {
             position: absolute;
-            top: 0; left: 0;
-            width: 45%;
-            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00d4ff, transparent);
+            box-shadow: 0 0 30px #00d4ff;
+            opacity: 0.4;
             pointer-events: none;
-            z-index: 1;
+            animation: floatOrb 20s infinite linear;
         }
 
+        @keyframes floatOrb {
+            0% { transform: translateY(100vh) translateX(-100px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100vw) rotate(360deg); }
+        }
+
+        /* Responsive */
         @media (max-width: 1024px) {
             .container { flex-direction: column; }
             .left, .right { width: 100%; }
-            .left { padding: 60px 40px; text-align: center; }
-            .login-box { margin: 0 auto; }
-            h1 { font-size: 5rem; }
-            .right { height: 400px; }
-            .particles { width: 100%; }
+            .left { padding: 60px 30px; text-align: center; }
+            h1 { font-size: 5.5rem; }
+            .login-box { width: 90%; max-width: 400px; margin: 0 auto; }
+            .right { height: 50vh; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="particles" id="particles"></div>
+    <!-- Matrix Rain Background -->
+    <canvas id="matrix-bg"></canvas>
 
     <div class="container">
-        <!-- Left Side -->
+        <!-- LEFT -->
         <div class="left">
             <h1>BETA</h1>
-            <p class="tagline">The next generation is loading.<br>Early access starts soon.</p>
+            <p class="tagline">Access restricted. Elite early access incoming.<br>Welcome to the future.</p>
 
             <div class="login-box">
-                <h2 style="margin-bottom: 20px; font-size: 1.6rem;">Get Early Access</h2>
+                <h2 style="font-family: Orbitron; margin-bottom: 25px; color: #00d4ff; font-size: 1.8rem;">
+                    SECURE ACCESS
+                </h2>
                 
-                <input type="email" placeholder="Email address" id="email">
-                <input type="password" placeholder="Create password (optional)">
+                <input type="email" placeholder="classified@domain.io" id="email">
+                <input type="password" placeholder="••••••••••••" autocomplete="off">
                 
-                <button onclick="login()">JOIN BETA WAITLIST</button>
+                <button onclick="accessGranted()">GRANT ACCESS</button>
                 
                 <div class="or"><span>OR</span></div>
                 
-                <button class="notify" onclick="notifyOnly()">Just Notify Me When Live</button>
+                <button class="notify" onclick="accessGranted()">NOTIFY ON LAUNCH</button>
             </div>
 
-            <p id="msg" style="margin-top: 20px; opacity: 0; transition: 0.5s;"></p>
+            <p id="msg" style="margin-top: 30px; font-size: 1.3rem; opacity: 0; font-weight: bold;"></p>
         </div>
 
-        <!-- Right Side - Wallpaper -->
+        <!-- RIGHT -->
         <div class="right"></div>
     </div>
 
     <script>
-        function login() {
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            ctx.fillStyle = 'rgba(10, 14, 23, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00d4ff';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+                ctx.fillText(text, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 35);
+
+        // Access Granted Animation
+        function accessGranted() {
             const email = document.getElementById('email').value;
             const msg = document.getElementById('msg');
+            
             if (email && email.includes('@')) {
-                msg.style.color = '#00d4ff';
-                msg.textContent = 'You\'re in! Welcome to the beta squad';
-                msg.style.opacity = 1;
+                msg.innerHTML = 'ACCESS GRANTED <span style="color:#00ff00;">✓</span>';
+                msg.style.color = '#00ff00';
+                
+                // Trigger epic effects
+                document.body.style.animation = 'pulse 1s';
+                setTimeout(() => {
+                    document.querySelector('.login-box').style.transform = 'scale(1.05)';
+                    document.querySelector('.login-box').style.boxShadow = '0 0 80px #00ff00';
+                }, 200);
             } else {
-                msg.style.color = '#ff5555';
-                msg.textContent = 'Please enter a valid email';
-                msg.style.opacity = 1;
+                msg.textContent = 'ACCESS DENIED';
+                msg.style.color = '#ff0066';
             }
-            setTimeout(() => msg.style.opacity = 0, 4000);
+            msg.style.opacity = 1;
+            setTimeout(() => {
+                msg.style.opacity = 0;
+                document.body.style.animation = '';
+                document.querySelector('.login-box').style.transform = '';
+                document.querySelector('.login-box').style.boxShadow = '';
+            }, 4000);
         }
 
-        function notifyOnly() {
-            login(); // same behavior for now
-        }
+        // Floating Orbs
+        setInterval(() => {
+            const orb = document.createElement('div');
+            orb.classList.add('orb');
+            orb.style.width = orb.style.height = Math.random() * 80 + 20 + 'px';
+            orb.style.left = Math.random() * 50 + '%';
+            orb.style.top = '100vh';
+            orb.style.animationDuration = Math.random() * 20 + 15 + 's';
+            document.querySelector('.right').appendChild(orb);
+            setTimeout(() => orb.remove(), 35000);
+        }, 3000);
 
-        // Floating blue particles on left side only
-        const particles = document.getElementById('particles');
-        function createParticle() {
-            const p = document.createElement('div');
-            p.style.position = 'absolute';
-            p.style.width = p.style.height = Math.random() * 5 + 3 + 'px';
-            p.style.background = 'rgba(0, 212, 255, 0.7)';
-            p.style.borderRadius = '50%';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.top = '-10px';
-            p.style.boxShadow = '0 0 20px #00d4ff';
-            p.style.animation = `drift ${Math.random() * 15 + 10}s linear forwards`;
-            particles.appendChild(p);
-            setTimeout(() => p.remove(), 25000);
-        }
-
-        setInterval(createParticle, 500);
-
-        // Add drift animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes drift {
-                0% { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
-                10% { opacity: 0.8; }
-                90% { opacity: 0.6; }
-                100% { transform: translateY(100vh) translateX(${Math.random() > 0.5 ? '' : '-'}150px) rotate(360deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
+        // Resize canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
