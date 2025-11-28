@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BETA | Login & Coming Soon</title>
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --dark: #0d1117;
+            --darker: #080c10;
+            --gray: #1a1f2e;
+            --light: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Split layout */
+        .container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Left side - Content */
+        .left {
+            width: 45%;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--dark);
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 6.5rem;
+            font-weight: 900;
+            letter-spacing: 10px;
+            background: linear-gradient(90deg, #00d4ff, #0088cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin: 20px 0 40px;
+            line-height: 1.6;
+            max-width: 420px;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            width: 380px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            margin: 12px 0;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .or {
+            text-align: center;
+            margin: 25px 0;
+            color: #777;
+            position: relative;
+        }
+
+        .or::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #333;
+        }
+
+        .or span {
+            background: var(--dark);
+            padding: 0 15px;
+        }
+
+        .notify {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-top: 10px;
+        }
+
+        .notify:hover {
+            background: var(--primary);
+            color: black;
+        }
+
+        /* Right side - Wallpaper */
+        .right {
+            width: 55%;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&h=1080&fit=crop&crop=entropy&auto=format&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .right::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 212, 255, 0.15) 0%,
+                rgba(0, 50, 100, 0.3) 50%,
+                rgba(0, 0, 0, 0.7) 100%);
+        }
+
+        /* Floating particles only on left side */
+        .particles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 45%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .container { flex-direction: column; }
+            .left, .right { width: 100%; }
+            .left { padding: 60px 40px; text-align: center; }
+            .login-box { margin: 0 auto; }
+            h1 { font-size: 5rem; }
+            .right { height: 400px; }
+            .particles { width: 100%; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Left Side -->
+        <div class="left">
+            <h1>BETA</h1>
+            <p class="tagline">The next generation is loading.<br>Early access starts soon.</p>
+
+            <div class="login-box">
+                <h2 style="margin-bottom: 20px; font-size: 1.6rem;">Get Early Access</h2>
+                
+                <input type="email" placeholder="Email address" id="email">
+                <input type="password" placeholder="Create password (optional)">
+                
+                <button onclick="login()">JOIN BETA WAITLIST</button>
+                
+                <div class="or"><span>OR</span></div>
+                
+                <button class="notify" onclick="notifyOnly()">Just Notify Me When Live</button>
+            </div>
+
+            <p id="msg" style="margin-top: 20px; opacity: 0; transition: 0.5s;"></p>
+        </div>
+
+        <!-- Right Side - Wallpaper -->
+        <div class="right"></div>
+    </div>
+
+    <script>
+        function login() {
+            const email = document.getElementById('email').value;
+            const msg = document.getElementById('msg');
+            if (email && email.includes('@')) {
+                msg.style.color = '#00d4ff';
+                msg.textContent = 'You\'re in! Welcome to the beta squad';
+                msg.style.opacity = 1;
+            } else {
+                msg.style.color = '#ff5555';
+                msg.textContent = 'Please enter a valid email';
+                msg.style.opacity = 1;
+            }
+            setTimeout(() => msg.style.opacity = 0, 4000);
+        }
+
+        function notifyOnly() {
+            login(); // same behavior for now
+        }
+
+        // Floating blue particles on left side only
+        const particles = document.getElementById('particles');
+        function createParticle() {
+            const p = document.createElement('div');
+            p.style.position = 'absolute';
+            p.style.width = p.style.height = Math.random() * 5 + 3 + 'px';
+            p.style.background = 'rgba(0, 212, 255, 0.7)';
+            p.style.borderRadius = '50%';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = '-10px';
+            p.style.boxShadow = '0 0 20px #00d4ff';
+            p.style.animation = `drift ${Math.random() * 15 + 10}s linear forwards`;
+            particles.appendChild(p);
+            setTimeout(() => p.remove(), 25000);
+        }
+
+        setInterval(createParticle, 500);
+
+        // Add drift animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes drift {
+                0% { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
+                10% { opacity: 0.8; }
+                90% { opacity: 0.6; }
+                100% { transform: translateY(100vh) translateX(${Math.random() > 0.5 ? '' : '-'}150px) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
