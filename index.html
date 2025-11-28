@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BETA | Access Granted</title>
+    <title>BETA - Access Terminal</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00d4ff;
-            --primary-glow: #00d4ff;
             --dark: #0a0e17;
             --darker: #05070f;
             --gray: #1a2332;
@@ -20,89 +19,80 @@
             font-family: 'Inter', sans-serif;
             background: var(--dark);
             color: white;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Animated Matrix Rain Background */
+        /* Matrix Rain Full Screen */
         #matrix-bg {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            opacity: 0.15;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            opacity: 0.12;
+        }
+
+        /* HERO SECTION - Full Screen */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0e17 0%, #0f1a2e 100%);
         }
 
         .container {
             display: flex;
             width: 100%;
-            min-height: 100vh;
-            position: relative;
-            z-index: 2;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 50px;
+            gap: 50px;
         }
 
-        /* LEFT SIDE */
         .left {
-            width: 45%;
-            padding: 80px 100px;
+            flex: 1;
+            padding: 100px 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background: linear-gradient(135deg, #0a0e17 0%, #0f1a2e 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .left::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(0,212,255,0.15) 0%, transparent 50%);
-            pointer-events: none;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 8rem;
+            font-size: 9rem;
             font-weight: 900;
-            letter-spacing: 12px;
+            letter-spacing: 15px;
             background: linear-gradient(90deg, #00d4ff, #00ffaa, #0088ff);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(0,212,255,0.6);
-            animation: glow 3s infinite alternate;
+            text-shadow: 0 0 60px rgba(0,212,255,0.6);
+            animation: glow 4s infinite alternate;
         }
 
-        @keyframes glow {
-            from { filter: hue-rotate(0deg); }
-            to { filter: hue-rotate(30deg); }
-        }
+        @keyframes glow { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(40deg); } }
 
         .tagline {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            margin: 25px 0 50px;
-            line-height: 1.7;
-            max-width: 460px;
-            background: linear-gradient(90deg, #ccc, #00d4ff);
+            font-size: 1.7rem;
+            margin: 30px 0 50px;
+            max-width: 500px;
+            background: linear-gradient(90deg, #aaa, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .login-box {
-            background: rgba(10, 20, 40, 0.6);
+            background: rgba(10,20,40,0.7);
             backdrop-filter: blur(20px);
-            padding: 45px;
-            border-radius: 20px;
-            border: 1.5px solid rgba(0, 212, 255, 0.3);
-            width: 400px;
-            box-shadow: 
-                0 0 50px rgba(0, 212, 255, 0.3),
-                inset 0 0 30px rgba(0, 212, 255, 0.1);
+            padding: 50px;
+            border-radius: 24px;
+            border: 2px solid rgba(0,212,255,0.4);
+            width: 420px;
+            box-shadow: 0 0 80px rgba(0,212,255,0.3);
             position: relative;
             overflow: hidden;
-            transition: transform 0.4s;
         }
 
         .login-box::before {
@@ -110,9 +100,8 @@
             position: absolute;
             top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0,212,255,0.1), transparent);
-            animation: shine 6s infinite;
-            pointer-events: none;
+            background: linear-gradient(45deg, transparent, rgba(0,212,255,0.15), transparent);
+            animation: shine 8s infinite;
         }
 
         @keyframes shine {
@@ -120,77 +109,51 @@
             100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
         }
 
-        input {
+        input, button {
             width: 100%;
-            padding: 18px 22px;
-            margin: 14px 0;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(0,212,255,0.4);
+            padding: 18px 24px;
+            margin: 15px 0;
             border-radius: 12px;
-            color: white;
             font-size: 1.1rem;
-            outline: none;
             transition: all 0.4s;
+        }
+
+        input {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(0,212,255,0.5);
+            color: white;
         }
 
         input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 25px rgba(0,212,255,0.6);
-            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0,212,255,0.6);
+            outline: none;
         }
 
         button {
-            width: 100%;
-            padding: 18px;
             background: linear-gradient(90deg, #00d4ff, #0099ff);
             color: black;
             font-weight: bold;
-            font-size: 1.2rem;
             border: none;
-            border-radius: 12px;
             cursor: pointer;
-            margin-top: 15px;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s;
-        }
-
-        button::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s;
-        }
-
-        button:hover::after {
-            left: 100%;
         }
 
         button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,212,255,0.5);
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px rgba(0,212,255,0.5);
         }
 
-        .notify {
-            background: transparent;
-            border: 2px solid var(--primary) !important;
-            color: var(--primary);
-        }
+        .notify { background: transparent; border: 2px solid var(--primary) !important; color: var(--primary); }
+        .notify:hover { background: var(--primary) !important; color: black; }
 
-        .notify:hover {
-            background: var(--primary) !important;
-            color: black;
-        }
-
-        /* RIGHT SIDE - EPIC WALLPAPER + SCANLINES */
+        /* RIGHT SIDE - IMAGE */
         .right {
-            width: 55%;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)),
-                        url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&h=1080&fit=crop&auto=format&q=80');
-            background-size: cover;
-            background-position: center;
+            flex: 1;
+            background: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&h=1080&fit=crop&auto=format&q=80') center/cover no-repeat;
+            border-radius: 30px;
+            box-shadow: 0 0 100px rgba(0,212,255,0.3);
             position: relative;
             overflow: hidden;
         }
@@ -198,91 +161,138 @@
         .right::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0,212,255,0.03) 2px,
-                rgba(0,212,255,0.03) 4px
-            );
-            animation: scanlines 8s linear infinite;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(0,212,255,0.1), transparent 50%);
         }
 
-        @keyframes scanlines {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(4px); }
+        /* MORE SECTIONS - Scrollable Content */
+        .features, .countdown, .footer {
+            padding: 120px 50px;
+            text-align: center;
         }
 
-        /* Particles + Floating Orbs */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, #00d4ff, transparent);
-            box-shadow: 0 0 30px #00d4ff;
-            opacity: 0.4;
-            pointer-events: none;
-            animation: floatOrb 20s infinite linear;
+        .features {
+            background: #0f1624;
         }
 
-        @keyframes floatOrb {
-            0% { transform: translateY(100vh) translateX(-100px) rotate(0deg); }
-            100% { transform: translateY(-100px) translateX(100vw) rotate(360deg); }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 80px auto 0;
+        }
+
+        .feature-card {
+            background: rgba(0,212,255,0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,212,255,0.2);
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 30px 60px rgba(0,212,255,0.2);
+        }
+
+        .countdown {
+            background: linear-gradient(135deg, #0a0e17, #001122);
+        }
+
+        #timer {
+            font-family: 'Orbitron';
+            font-size: 4rem;
+            letter-spacing: 10px;
+            color: var(--primary);
+            text-shadow: 0 0 40px var(--primary);
+        }
+
+        .footer {
+            background: #000;
+            padding: 80px 50px;
+            font-size: 1.2rem;
+            opacity: 0.8;
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .container { flex-direction: column; }
+            .container { flex-direction: column; padding: 0 30px; }
             .left, .right { width: 100%; }
-            .left { padding: 60px 30px; text-align: center; }
-            h1 { font-size: 5.5rem; }
-            .login-box { width: 90%; max-width: 400px; margin: 0 auto; }
-            .right { height: 50vh; }
+            h1 { font-size: 6rem; }
+            .login-box { width: 100%; max-width: 420px; margin: 40px auto; }
+            .right { height: 60vh; border-radius: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Matrix Rain Background -->
+    <!-- Matrix Rain -->
     <canvas id="matrix-bg"></canvas>
 
-    <div class="container">
-        <!-- LEFT -->
-        <div class="left">
-            <h1>BETA</h1>
-            <p class="tagline">Access restricted. Elite early access incoming.<br>Welcome to the future.</p>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="left">
+                <h1>BETA</h1>
+                <p class="tagline">The future is encrypted. Only a few will enter.</p>
 
-            <div class="login-box">
-                <h2 style="font-family: Orbitron; margin-bottom: 25px; color: #00d4ff; font-size: 1.8rem;">
-                    SECURE ACCESS
-                </h2>
-                
-                <input type="email" placeholder="classified@domain.io" id="email">
-                <input type="password" placeholder="••••••••••••" autocomplete="off">
-                
-                <button onclick="accessGranted()">GRANT ACCESS</button>
-                
-                <div class="or"><span>OR</span></div>
-                
-                <button class="notify" onclick="accessGranted()">NOTIFY ON LAUNCH</button>
+                <div class="login-box">
+                    <h2 style="font-family: Orbitron; color: var(--primary); margin-bottom: 30px; font-size: 2rem;">
+                        SECURE ACCESS POINT
+                    </h2>
+                    <input type="email" placeholder="classified@domain.io" id="email">
+                    <input type="password" placeholder="•••••••••••">
+                    <button onclick="accessGranted()">GRANT ACCESS</button>
+                    <div style="text-align:center; margin:20px 0; color:#666;">OR</div>
+                    <button class="notify" onclick="accessGranted()">NOTIFY ME ON LAUNCH</button>
+                </div>
+                <p id="msg" style="margin-top: 30px; font-size: 1.4rem; opacity: 0; font-weight: bold;"></p>
             </div>
-
-            <p id="msg" style="margin-top: 30px; font-size: 1.3rem; opacity: 0; font-weight: bold;"></p>
+            <div class="right"></div>
         </div>
+    </section>
 
-        <!-- RIGHT -->
-        <div class="right"></div>
-    </div>
+    <!-- FEATURES -->
+    <section class="features">
+        <h2 style="font-size: 4rem; margin-bottom: 20px; background: linear-gradient(90deg, #00d4ff, #00ffaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            What You'll Get
+        </h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Lightning Fast</h3>
+                <p>Built with cutting-edge tech stack. 1000x faster than legacy systems.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Quantum Security</h3>
+                <p>End-to-end encryption. Your data never touches the ground.</p>
+            </div>
+            <div class="feature-card">
+                <h3>AI-Powered</h3>
+                <p>Smart automation that learns and adapts to your workflow.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown">
+        <h2 style="font-size: 3rem; margin-bottom: 40px; opacity: 0.9;">Launch In</h2>
+        <div id="timer">88:88:88:88</div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 BETA PROJECT • All access logged • Unauthorized entry prohibited</p>
+    </footer>
 
     <script>
-        // Matrix Rain Effect
+        // Matrix Rain (same as before)
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         const letters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const fontSize = 14;
+        const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
 
@@ -291,60 +301,50 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#00d4ff';
             ctx.font = fontSize + 'px monospace';
-
             for (let i = 0; i < drops.length; i++) {
                 const text = letters[Math.floor(Math.random() * letters.length)];
-                const x = i * fontSize;
-                const y = drops[i] * fontSize;
-                ctx.fillText(text, x, y);
-
-                if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(draw, 35);
+        setInterval(draw, 40);
 
-        // Access Granted Animation
+        // Access Granted
         function accessGranted() {
             const email = document.getElementById('email').value;
             const msg = document.getElementById('msg');
-            
             if (email && email.includes('@')) {
-                msg.innerHTML = 'ACCESS GRANTED <span style="color:#00ff00;">✓</span>';
+                msg.innerHTML = 'ACCESS GRANTED';
                 msg.style.color = '#00ff00';
-                
-                // Trigger epic effects
-                document.body.style.animation = 'pulse 1s';
-                setTimeout(() => {
-                    document.querySelector('.login-box').style.transform = 'scale(1.05)';
-                    document.querySelector('.login-box').style.boxShadow = '0 0 80px #00ff00';
-                }, 200);
             } else {
                 msg.textContent = 'ACCESS DENIED';
                 msg.style.color = '#ff0066';
             }
             msg.style.opacity = 1;
-            setTimeout(() => {
-                msg.style.opacity = 0;
-                document.body.style.animation = '';
-                document.querySelector('.login-box').style.transform = '';
-                document.querySelector('.login-box').style.boxShadow = '';
-            }, 4000);
+            setTimeout(() => msg.style.opacity = 0, 5000);
         }
 
-        // Floating Orbs
-        setInterval(() => {
-            const orb = document.createElement('div');
-            orb.classList.add('orb');
-            orb.style.width = orb.style.height = Math.random() * 80 + 20 + 'px';
-            orb.style.left = Math.random() * 50 + '%';
-            orb.style.top = '100vh';
-            orb.style.animationDuration = Math.random() * 20 + 15 + 's';
-            document.querySelector('.right').appendChild(orb);
-            setTimeout(() => orb.remove(), 35000);
-        }, 3000);
+        // Countdown Timer (example: 30 days from now)
+        function startCountdown() {
+            const launchDate = new Date();
+            launchDate.setDate(launchDate.getDate() + 30); // 30 days from now
 
-        // Resize canvas
+            setInterval(() => {
+                const now = new Date();
+                const diff = launchDate - now;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('timer').textContent =
+                    `\( {days.toString().padStart(2,'0')} : \){hours.toString().padStart(2,'0')} : \( {minutes.toString().padStart(2,'0')} : \){seconds.toString().padStart(2,'0')}`;
+            }, 1000);
+        }
+        startCountdown();
+
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
